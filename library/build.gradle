@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply plugin: 'android-maven'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+    publishNonDefault true
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:recyclerview-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:21.0.3'
+
+    compile 'io.reactivex:rxandroid:0.23.0'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp:okhttp:2.3.0'
+    compile 'com.squareup.picasso:picasso:2.5.0'
+    compile 'com.jakewharton.timber:timber:2.5.0'
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.2.1@aar') {
+        transitive = true;
+    }
+}
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}
