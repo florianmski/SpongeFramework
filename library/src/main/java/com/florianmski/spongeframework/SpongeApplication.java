@@ -9,14 +9,16 @@ import com.squareup.picasso.Picasso;
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
-public class SpongeApplication extends Application
+public abstract class SpongeApplication extends Application
 {
+    public abstract boolean isDebug();
+
     @Override
     public void onCreate()
     {
         super.onCreate();
 
-        if(BuildConfig.DEBUG)
+        if(isDebug())
             onDebug();
         else
             onRelease();
